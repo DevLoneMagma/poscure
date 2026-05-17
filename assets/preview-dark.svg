@@ -1,0 +1,341 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460">
+  <defs>
+    <style>
+      /* Scan shimmer on thumbs */
+      .shimmer { animation: shimmer 3s ease-in-out infinite; }
+      @keyframes shimmer {
+        0%   { transform: translateX(-100%); opacity: 0; }
+        20%  { opacity: 1; }
+        80%  { opacity: 1; }
+        100% { transform: translateX(400%); opacity: 0; }
+      }
+
+      /* Scan pulse dot */
+      .scan-pulse { animation: pulse 1.3s ease-in-out infinite; }
+      @keyframes pulse {
+        0%,100% { opacity: 1; r: 3; }
+        50%      { opacity: 0.3; r: 2; }
+      }
+
+      /* Ring timer depletion */
+      .ring-arc {
+        stroke-dasharray: 163;
+        stroke-dashoffset: 40;
+        animation: ring 30s linear infinite;
+        transform-origin: 672px 148px;
+        transform: rotate(-90deg);
+      }
+      @keyframes ring {
+        from { stroke-dashoffset: 40; }
+        to   { stroke-dashoffset: 163; }
+      }
+
+      /* Timer number */
+      .timer-fade { animation: numfade 1s step-end infinite; }
+      @keyframes numfade {
+        0%  { opacity: 1; }
+        50% { opacity: 0.7; }
+        100%{ opacity: 1; }
+      }
+
+      /* Progress bar fill */
+      .prog-fill {
+        animation: progfill 30s linear infinite;
+      }
+      @keyframes progfill {
+        from { width: 80px; }
+        to   { width: 280px; }
+      }
+
+      /* Subtle thumb hover pulse */
+      .sel-glow { animation: selglow 2.5s ease-in-out infinite; }
+      @keyframes selglow {
+        0%,100% { opacity: 0.18; }
+        50%      { opacity: 0.28; }
+      }
+
+      /* Cursor blink on search */
+      .cursor { animation: blink 1.1s step-end infinite; }
+      @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    </style>
+
+    <!-- Clip the whole card -->
+    <clipPath id="card-clip">
+      <rect x="0" y="0" width="800" height="460" rx="14"/>
+    </clipPath>
+
+    <!-- Thumb clip -->
+    <clipPath id="thumb-clip">
+      <rect x="0" y="0" width="96" height="96" rx="5"/>
+    </clipPath>
+
+    <!-- Sidebar gradient -->
+    <linearGradient id="sb-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#18181C"/>
+      <stop offset="100%" stop-color="#111113"/>
+    </linearGradient>
+
+    <!-- Shimmer gradient -->
+    <linearGradient id="shim" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="white" stop-opacity="0"/>
+      <stop offset="50%"  stop-color="white" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Ring glow filter -->
+    <filter id="ring-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Drop shadow for window -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="24" flood-color="#000" flood-opacity="0.7"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="460" fill="#0A0A0B"/>
+
+  <!-- Subtle grid background -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#28283A" stroke-width="0.4" opacity="0.4"/>
+  </pattern>
+  <rect width="800" height="460" fill="url(#grid)"/>
+
+  <!-- App window card -->
+  <g filter="url(#shadow)">
+  <g clip-path="url(#card-clip)">
+
+  <!-- Window base -->
+  <rect x="0" y="0" width="800" height="460" rx="14" fill="#111113" stroke="#28283A" stroke-width="1"/>
+
+  <!-- ══════════════════════════════════════
+       TITLE BAR
+  ══════════════════════════════════════ -->
+  <rect x="0" y="0" width="800" height="36" fill="#18181C"/>
+  <line x1="0" y1="36" x2="800" y2="36" stroke="#28283A" stroke-width="1"/>
+
+  <!-- Traffic lights -->
+  <circle cx="18" cy="18" r="5.5" fill="#FF5F57"/>
+  <circle cx="33" cy="18" r="5.5" fill="#FFBD2E"/>
+  <circle cx="48" cy="18" r="5.5" fill="#28C840"/>
+
+  <!-- Title bar logo + name -->
+  <g transform="translate(204, 10)">
+    <rect width="16" height="16" rx="3.5" fill="#1F1F25" stroke="#38384E" stroke-width="0.8"/>
+    <ellipse cx="8" cy="5.2" rx="1.8" ry="2" fill="none" stroke="#C8A97E" stroke-width="0.9"/>
+    <line x1="8" y1="7.2" x2="8" y2="11" stroke="#C8A97E" stroke-width="0.9" stroke-linecap="round"/>
+    <line x1="8" y1="8.5" x2="5.5" y2="10.5" stroke="#C8A97E" stroke-width="0.8" stroke-linecap="round"/>
+    <line x1="8" y1="8.5" x2="10.5" y2="10.5" stroke="#C8A97E" stroke-width="0.8" stroke-linecap="round"/>
+    <line x1="6.5" y1="11" x2="5.5" y2="14" stroke="#C8A97E" stroke-width="0.8" stroke-linecap="round"/>
+    <line x1="9.5" y1="11" x2="10.5" y2="14" stroke="#C8A97E" stroke-width="0.8" stroke-linecap="round"/>
+  </g>
+  <text x="224" y="23" font-family="'Segoe UI',system-ui,sans-serif" font-size="11" fill="#5C5A66" font-weight="500">Poscure — Library</text>
+
+  <!-- ══════════════════════════════════════
+       SIDEBAR  (x: 0–190)
+  ══════════════════════════════════════ -->
+  <rect x="0" y="36" width="190" height="424" fill="url(#sb-grad)"/>
+  <line x1="190" y1="36" x2="190" y2="460" stroke="#28283A" stroke-width="1"/>
+
+  <!-- Sidebar header -->
+  <rect x="0" y="36" width="190" height="38" fill="#1F1F25"/>
+  <line x1="0" y1="74" x2="190" y2="74" stroke="#28283A" stroke-width="1"/>
+  <text x="14" y="59" font-family="'Segoe UI',system-ui,sans-serif" font-size="9" fill="#5C5A66" font-weight="700" letter-spacing="1.2">LIBRARY</text>
+  <!-- Add button -->
+  <rect x="130" y="49" width="46" height="18" rx="4" fill="#C8A97E"/>
+  <text x="153" y="62" font-family="'Segoe UI',system-ui,sans-serif" font-size="9.5" fill="#0A0A0B" font-weight="700" text-anchor="middle">+ Add</text>
+
+  <!-- Folder rows -->
+  <!-- Active folder -->
+  <rect x="8" y="82" width="174" height="42" rx="6" fill="#1F1F25"/>
+  <text x="18" y="99" font-family="'Segoe UI',system-ui,sans-serif" font-size="12" fill="#C8A97E" font-weight="500">Figure Studies</text>
+  <text x="18" y="115" font-family="'Segoe UI',system-ui,sans-serif" font-size="10" fill="#5C5A66">847 images</text>
+
+  <!-- Folder 2 -->
+  <rect x="8" y="130" width="174" height="40" rx="6" fill="transparent"/>
+  <text x="18" y="147" font-family="'Segoe UI',system-ui,sans-serif" font-size="12" fill="#F0EEE8" font-weight="500">Gestures</text>
+  <text x="18" y="162" font-family="'Segoe UI',system-ui,sans-serif" font-size="10" fill="#5C5A66">1,203 images</text>
+
+  <!-- Folder 3 -->
+  <rect x="8" y="176" width="174" height="40" rx="6" fill="transparent"/>
+  <text x="18" y="193" font-family="'Segoe UI',system-ui,sans-serif" font-size="12" fill="#F0EEE8" font-weight="500">Anatomy Refs</text>
+  <text x="18" y="208" font-family="'Segoe UI',system-ui,sans-serif" font-size="10" fill="#5C5A66">312 images</text>
+
+  <!-- Folder 4 — scanning -->
+  <rect x="8" y="222" width="174" height="40" rx="6" fill="transparent"/>
+  <text x="18" y="239" font-family="'Segoe UI',system-ui,sans-serif" font-size="12" fill="#F0EEE8" font-weight="500">Life Drawing</text>
+  <!-- Scan pulse dot -->
+  <circle class="scan-pulse" cx="18" cy="254" r="3" fill="#C8A97E"/>
+  <text x="26" y="257" font-family="'Segoe UI',system-ui,sans-serif" font-size="10" fill="#8A6F4E">Scanning…</text>
+
+  <!-- Sidebar stat bar -->
+  <rect x="0" y="418" width="190" height="42" fill="#1F1F25"/>
+  <line x1="0" y1="418" x2="190" y2="418" stroke="#28283A" stroke-width="1"/>
+  <text x="14" y="443" font-family="'Segoe UI',system-ui,sans-serif" font-size="10" fill="#5C5A66">2,362 images · 4 folders</text>
+
+  <!-- ══════════════════════════════════════
+       GRID TOOLBAR  (x: 190–800, y: 36–74)
+  ══════════════════════════════════════ -->
+  <rect x="190" y="36" width="610" height="38" fill="#18181C"/>
+  <line x1="190" y1="74" x2="800" y2="74" stroke="#28283A" stroke-width="1"/>
+
+  <!-- Search bar -->
+  <rect x="202" y="46" width="200" height="22" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <text x="212" y="62" font-family="'Segoe UI',system-ui,sans-serif" font-size="10" fill="#5C5A66">Search by filename…</text>
+  <rect class="cursor" x="280" y="50" width="1" height="13" fill="#C8A97E" opacity="0.7"/>
+
+  <!-- Filters -->
+  <rect x="410" y="46" width="64" height="22" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <text x="442" y="62" font-family="'Segoe UI',system-ui,sans-serif" font-size="10" fill="#9896A0" text-anchor="middle">Any ▾</text>
+  <rect x="480" y="46" width="64" height="22" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <text x="512" y="62" font-family="'Segoe UI',system-ui,sans-serif" font-size="10" fill="#9896A0" text-anchor="middle">Medium ▾</text>
+
+  <!-- Cols pill -->
+  <rect x="554" y="46" width="52" height="22" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <text x="580" y="62" font-family="'Segoe UI',system-ui,sans-serif" font-size="10" fill="#9896A0" text-anchor="middle">Cols: 6</text>
+
+  <!-- ══════════════════════════════════════
+       THUMBNAIL GRID
+  ══════════════════════════════════════ -->
+  <!-- 6 columns × 3 rows of thumbnails -->
+  <!-- Row 1 -->
+  <!-- Define figure poses as reusable symbols -->
+  <defs>
+    <!-- Standing arms up -->
+    <symbol id="fig-a" viewBox="0 0 32 44">
+      <ellipse cx="16" cy="6" rx="5" ry="5.5" fill="none" stroke="#5C5A66" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="16" y1="11.5" x2="16" y2="27" stroke="#5C5A66" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="16" y1="15" x2="7" y2="10" stroke="#5C5A66" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="16" y1="15" x2="25" y2="10" stroke="#5C5A66" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="16" y1="27" x2="11" y2="38" stroke="#5C5A66" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="16" y1="27" x2="21" y2="38" stroke="#5C5A66" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+    <!-- Seated -->
+    <symbol id="fig-b" viewBox="0 0 32 44">
+      <ellipse cx="16" cy="6" rx="4.5" ry="5" fill="none" stroke="#5C5A66" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="16" y1="11" x2="16" y2="25" stroke="#5C5A66" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="8" y1="18" x2="24" y2="18" stroke="#5C5A66" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="16" y1="25" x2="7" y2="25" stroke="#5C5A66" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="7" y1="25" x2="7" y2="38" stroke="#5C5A66" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="16" y1="25" x2="25" y2="25" stroke="#5C5A66" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="25" y1="25" x2="25" y2="38" stroke="#5C5A66" stroke-width="1.4" stroke-linecap="round"/>
+    </symbol>
+    <!-- Leaning -->
+    <symbol id="fig-c" viewBox="0 0 32 44">
+      <ellipse cx="18" cy="6" rx="4.5" ry="5" fill="none" stroke="#5C5A66" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="18" y1="11" x2="14" y2="26" stroke="#5C5A66" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="10" y1="16" x2="22" y2="14" stroke="#5C5A66" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="10" y1="16" x2="6"  y2="26" stroke="#5C5A66" stroke-width="1.3" stroke-linecap="round"/>
+      <line x1="14" y1="26" x2="10" y2="38" stroke="#5C5A66" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="14" y1="26" x2="19" y2="38" stroke="#5C5A66" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+    <!-- Arms wide -->
+    <symbol id="fig-d" viewBox="0 0 32 44">
+      <ellipse cx="16" cy="5.5" rx="4.5" ry="5" fill="none" stroke="#5C5A66" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="16" y1="10.5" x2="16" y2="26" stroke="#5C5A66" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="4"  y1="16" x2="28" y2="16" stroke="#5C5A66" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="16" y1="26" x2="11" y2="38" stroke="#5C5A66" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="16" y1="26" x2="21" y2="38" stroke="#5C5A66" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+
+  <!-- Thumb grid: 6 cols, 3 rows, starting x=198, y=80 -->
+  <!-- col spacing: 99px, row spacing: 100px, thumb size: 94×94 -->
+
+  <!-- Row 1 -->
+  <!-- [0,0] selected -->
+  <rect x="198" y="82"  width="94" height="94" rx="5" fill="#1F1F25" stroke="#C8A97E" stroke-width="1.2"/>
+  <rect x="198" y="82"  width="94" height="94" rx="5" fill="#C8A97E" opacity="0.16" class="sel-glow"/>
+  <use href="#fig-a" x="214" y="107" width="62" height="44" opacity="0.6"/>
+
+  <!-- [1,0] selected -->
+  <rect x="297" y="82"  width="94" height="94" rx="5" fill="#1F1F25" stroke="#C8A97E" stroke-width="1.2"/>
+  <rect x="297" y="82"  width="94" height="94" rx="5" fill="#C8A97E" opacity="0.16" class="sel-glow"/>
+  <use href="#fig-b" x="313" y="107" width="62" height="44" opacity="0.6"/>
+
+  <!-- [2,0] selected -->
+  <rect x="396" y="82"  width="94" height="94" rx="5" fill="#1F1F25" stroke="#C8A97E" stroke-width="1.2"/>
+  <rect x="396" y="82"  width="94" height="94" rx="5" fill="#C8A97E" opacity="0.16" class="sel-glow"/>
+  <use href="#fig-c" x="412" y="107" width="62" height="44" opacity="0.6"/>
+
+  <!-- [3,0] -->
+  <rect x="495" y="82"  width="94" height="94" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <use href="#fig-d" x="511" y="107" width="62" height="44" opacity="0.35"/>
+
+  <!-- [4,0] -->
+  <rect x="594" y="82"  width="94" height="94" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <use href="#fig-a" x="610" y="107" width="62" height="44" opacity="0.35"/>
+
+  <!-- [5,0] -->
+  <rect x="693" y="82"  width="94" height="94" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <use href="#fig-b" x="709" y="107" width="62" height="44" opacity="0.35"/>
+
+  <!-- Row 2 -->
+  <rect x="198" y="182" width="94" height="94" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <use href="#fig-c" x="214" y="207" width="62" height="44" opacity="0.35"/>
+  <!-- shimmer -->
+  <rect x="198" y="182" width="94" height="94" rx="5" fill="url(#shim)" class="shimmer"/>
+
+  <rect x="297" y="182" width="94" height="94" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <use href="#fig-d" x="313" y="207" width="62" height="44" opacity="0.35"/>
+
+  <rect x="396" y="182" width="94" height="94" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <use href="#fig-a" x="412" y="207" width="62" height="44" opacity="0.35"/>
+
+  <rect x="495" y="182" width="94" height="94" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <use href="#fig-b" x="511" y="207" width="62" height="44" opacity="0.35"/>
+
+  <rect x="594" y="182" width="94" height="94" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <use href="#fig-c" x="610" y="207" width="62" height="44" opacity="0.35"/>
+
+  <rect x="693" y="182" width="94" height="94" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <use href="#fig-d" x="709" y="207" width="62" height="44" opacity="0.35"/>
+
+  <!-- Row 3 — partially visible (cuts off at bottom) -->
+  <rect x="198" y="282" width="94" height="94" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <use href="#fig-d" x="214" y="307" width="62" height="44" opacity="0.35"/>
+
+  <rect x="297" y="282" width="94" height="94" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <use href="#fig-a" x="313" y="307" width="62" height="44" opacity="0.35"/>
+
+  <rect x="396" y="282" width="94" height="94" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <use href="#fig-b" x="412" y="307" width="62" height="44" opacity="0.35"/>
+
+  <rect x="495" y="282" width="94" height="94" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <use href="#fig-c" x="511" y="307" width="62" height="44" opacity="0.35"/>
+
+  <rect x="594" y="282" width="94" height="94" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <use href="#fig-d" x="610" y="307" width="62" height="44" opacity="0.35"/>
+
+  <rect x="693" y="282" width="94" height="94" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <use href="#fig-a" x="709" y="307" width="62" height="44" opacity="0.35"/>
+
+  <!-- Row 4 (very bottom) -->
+  <rect x="198" y="382" width="94" height="70" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <rect x="297" y="382" width="94" height="70" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <rect x="396" y="382" width="94" height="70" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <rect x="495" y="382" width="94" height="70" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <rect x="594" y="382" width="94" height="70" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+  <rect x="693" y="382" width="94" height="70" rx="5" fill="#1F1F25" stroke="#28283A" stroke-width="1"/>
+
+  <!-- ══════════════════════════════════════
+       ACTION BAR (bottom of grid)
+  ══════════════════════════════════════ -->
+  <rect x="190" y="418" width="610" height="42" fill="#18181C"/>
+  <line x1="190" y1="418" x2="800" y2="418" stroke="#28283A" stroke-width="1"/>
+  <text x="202" y="443" font-family="'Segoe UI',system-ui,sans-serif" font-size="11" fill="#5C5A66">847 images</text>
+  <!-- "3 selected" pill -->
+  <rect x="268" y="430" width="70" height="18" rx="9" fill="rgba(200,169,126,0.12)" stroke="#8A6F4E" stroke-width="0.8"/>
+  <text x="303" y="443" font-family="'Segoe UI',system-ui,sans-serif" font-size="10" fill="#C8A97E" text-anchor="middle" font-weight="600">3 selected</text>
+  <!-- Start button -->
+  <rect x="630" y="428" width="156" height="22" rx="5" fill="#C8A97E"/>
+  <text x="708" y="443" font-family="'Segoe UI',system-ui,sans-serif" font-size="11" fill="#0A0A0B" text-anchor="middle" font-weight="700">▶ Start with Selected</text>
+
+  <!-- Window border -->
+  <rect x="0" y="0" width="800" height="460" rx="14" fill="none" stroke="#38384E" stroke-width="1"/>
+
+  </g><!-- end clip -->
+  </g><!-- end shadow -->
+</svg>

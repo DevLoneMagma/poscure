@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96">
+  <defs>
+    <style>
+      .bg  { fill: #111113; }
+      .bd  { fill: none; stroke: #28283A; stroke-width: 1.5; }
+      .fig { fill: none; stroke: #C8A97E; stroke-linecap: round; stroke-linejoin: round; }
+
+      /* Head bob */
+      .head { animation: headbob 4s ease-in-out infinite; transform-origin: 48px 22px; }
+      @keyframes headbob {
+        0%,100% { transform: translateY(0); }
+        50%      { transform: translateY(-1.5px); }
+      }
+
+      /* Left arm swing */
+      .arm-l { animation: arml 3.5s ease-in-out infinite; transform-origin: 34px 42px; }
+      @keyframes arml {
+        0%,100% { transform: rotate(0deg); }
+        50%      { transform: rotate(10deg); }
+      }
+
+      /* Right arm swing (opposite phase) */
+      .arm-r { animation: armr 3.5s ease-in-out infinite; transform-origin: 62px 42px; }
+      @keyframes armr {
+        0%,100% { transform: rotate(0deg); }
+        50%      { transform: rotate(-10deg); }
+      }
+
+      /* Breathe — whole figure */
+      .body { animation: breathe 4s ease-in-out infinite; transform-origin: 48px 55px; }
+      @keyframes breathe {
+        0%,100% { transform: scaleY(1); }
+        50%      { transform: scaleY(1.015); }
+      }
+    </style>
+  </defs>
+
+  <!-- Background tile -->
+  <rect width="96" height="96" rx="20" class="bg"/>
+  <rect width="96" height="96" rx="20" class="bd"/>
+
+  <!-- Figure -->
+  <g class="body">
+    <!-- Head -->
+    <g class="head">
+      <ellipse cx="48" cy="22" rx="8.5" ry="9.5" class="fig" stroke-width="2.2"/>
+    </g>
+
+    <!-- Neck -->
+    <line x1="48" y1="31.5" x2="48" y2="37" class="fig" stroke-width="2.2"/>
+
+    <!-- Shoulders -->
+    <line x1="34" y1="40" x2="62" y2="40" class="fig" stroke-width="2.4"/>
+
+    <!-- Torso -->
+    <line x1="48" y1="37" x2="48" y2="60" class="fig" stroke-width="2.4"/>
+
+    <!-- Left arm -->
+    <g class="arm-l">
+      <line x1="34" y1="40" x2="24" y2="54" class="fig" stroke-width="2"/>
+      <line x1="24" y1="54" x2="20" y2="66" class="fig" stroke-width="1.8"/>
+    </g>
+
+    <!-- Right arm -->
+    <g class="arm-r">
+      <line x1="62" y1="40" x2="72" y2="54" class="fig" stroke-width="2"/>
+      <line x1="72" y1="54" x2="76" y2="66" class="fig" stroke-width="1.8"/>
+    </g>
+
+    <!-- Hips -->
+    <line x1="38" y1="60" x2="58" y2="60" class="fig" stroke-width="2.2"/>
+
+    <!-- Left leg -->
+    <line x1="40" y1="60" x2="36" y2="78" class="fig" stroke-width="2"/>
+    <line x1="36" y1="78" x2="33" y2="90" class="fig" stroke-width="1.8"/>
+
+    <!-- Right leg -->
+    <line x1="56" y1="60" x2="60" y2="78" class="fig" stroke-width="2"/>
+    <line x1="60" y1="78" x2="63" y2="90" class="fig" stroke-width="1.8"/>
+
+    <!-- Joint dots -->
+    <circle cx="48" cy="37"  r="2.2" fill="#C8A97E"/>
+    <circle cx="34" cy="40"  r="2"   fill="#C8A97E"/>
+    <circle cx="62" cy="40"  r="2"   fill="#C8A97E"/>
+    <circle cx="24" cy="54"  r="1.8" fill="#C8A97E"/>
+    <circle cx="72" cy="54"  r="1.8" fill="#C8A97E"/>
+    <circle cx="48" cy="60"  r="2.2" fill="#C8A97E"/>
+    <circle cx="40" cy="60"  r="1.8" fill="#C8A97E"/>
+    <circle cx="56" cy="60"  r="1.8" fill="#C8A97E"/>
+    <circle cx="36" cy="78"  r="1.6" fill="#C8A97E"/>
+    <circle cx="60" cy="78"  r="1.6" fill="#C8A97E"/>
+  </g>
+</svg>
